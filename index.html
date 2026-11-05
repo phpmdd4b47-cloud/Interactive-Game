@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#140e1c">
+<title>女巫升級計畫</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="sky" aria-hidden="true"></div>
+
+<main id="console" aria-label="女巫掌機">
+  <!-- 螢幕（在外框底下） -->
+  <section id="screen">
+    <div id="status">
+      <div class="row r1">
+        <span id="st-day">第1天</span><span id="st-slot" class="chip">早上</span>
+        <span id="st-loc">灰燼塔樓</span><span id="st-mode" class="chip mode">單機</span>
+      </div>
+      <div class="row r2">
+        <span class="stat"><b>Lv</b><i id="st-lv">1</i></span>
+        <span class="stat bar mp"><b>MP</b><em><u id="st-mpbar"></u></em><i id="st-mp">20/20</i></span>
+        <span class="stat bar xp"><b>EXP</b><em><u id="st-xpbar"></u></em></span>
+        <span class="stat" title="通緝度"><b>⚑</b><i id="st-wanted">0</i></span>
+        <span class="stat" title="好感"><b>♥</b><i id="st-favor">10</i></span>
+      </div>
+    </div>
+
+    <div id="scene">
+      <div class="scene-bg"></div>
+      <div class="scene-img"></div>
+      <div class="scene-fx"></div>
+      <div class="scene-tint"></div>
+      <div class="scene-icon"></div>
+      <div class="scene-hecate" title="赫卡"></div>
+      <div class="scene-label"></div>
+    </div>
+
+    <div id="textbox">
+      <div id="text"></div>
+      <div id="calc"></div>
+      <div id="hint">Ⓐ 互動　✚ 捲動</div>
+    </div>
+
+    <div id="menu" class="hidden">
+      <div class="menu-title"></div>
+      <ul class="menu-list"></ul>
+      <div class="menu-foot"></div>
+    </div>
+
+    <div id="panel" class="hidden">
+      <div class="tabs"></div>
+      <div class="panel-body"></div>
+      <div class="panel-foot">◀ ▶ 切換分頁　Ⓑ／SELECT 關閉</div>
+    </div>
+
+    <div id="inputbox" class="hidden">
+      <div class="input-title">說話／行動</div>
+      <textarea id="freetext" rows="3" maxlength="400" placeholder="例如：「師傅，今天的晚餐是什麼？」我偷偷看了一眼地下室的門。"></textarea>
+      <div class="input-btns"><button id="input-cancel" type="button">取消</button><button id="input-send" type="button">送出 ▶</button></div>
+    </div>
+
+    <div id="busy" class="hidden"><span>赫卡正在構思劇情</span><i>．</i><i>．</i><i>．</i></div>
+
+    <div id="title" class="hidden">
+      <div class="title-stars"></div>
+      <div class="title-main">女巫<br>升級計畫</div>
+      <div class="title-sub">— Witch Console —</div>
+      <ul class="title-menu"></ul>
+      <div class="title-foot">PRESS START</div>
+    </div>
+
+    <div id="toast"></div>
+  </section>
+
+  <!-- 外框 -->
+  <img class="frame f-top" src="assets/console/body_top.webp" alt="" draggable="false">
+  <img class="frame f-mid" src="assets/console/body_mid.webp" alt="" draggable="false">
+  <img class="frame f-bot" src="assets/console/body_bot.webp" alt="" draggable="false">
+  <div id="nameplate">女巫升級計畫</div>
+
+  <!-- 按鈕層（座標依 layout.json） -->
+  <div id="controls">
+    <button class="btn" data-key="cmd_map" data-img="cmd_map" title="地圖（前往）　鍵盤 1" style="left:22.16%;top:24.96%;width:7.74%;height:10.62%"></button>
+    <button class="btn" data-key="cmd_gather" data-img="cmd_gather" title="採集　鍵盤 2" style="left:31.65%;top:24.96%;width:7.74%;height:10.62%"></button>
+    <button class="btn" data-key="cmd_explore" data-img="cmd_explore" title="探索　鍵盤 3" style="left:41.38%;top:24.96%;width:7.74%;height:10.62%"></button>
+    <button class="btn" data-key="cmd_brew" data-img="cmd_brew" title="調製　鍵盤 4" style="left:51.0%;top:24.96%;width:7.74%;height:10.62%"></button>
+    <button class="btn" data-key="cmd_throw" data-img="cmd_throw" title="投擲　鍵盤 5" style="left:60.61%;top:24.96%;width:7.74%;height:10.62%"></button>
+    <button class="btn" data-key="cmd_sleep" data-img="cmd_sleep" title="睡覺　鍵盤 6" style="left:70.11%;top:24.96%;width:7.74%;height:10.62%"></button>
+    <button class="btn dpad" data-key="dpad" data-img="dpad" title="方向鍵　鍵盤 ↑↓←→" style="left:19.58%;top:43.01%;width:18.29%;height:26.9%"></button>
+    <button class="btn" data-key="a" data-img="btn_a" title="A　確定（Z / 空白 / Enter）" style="left:71.04%;top:42.12%;width:9.85%;height:14.87%"></button>
+    <button class="btn" data-key="b" data-img="btn_b" title="B　返回（X / Esc）" style="left:60.02%;top:52.74%;width:10.55%;height:15.93%"></button>
+    <button class="btn" data-key="select" data-img="btn_select" title="SELECT　狀態／背包（Shift / Tab）" style="left:37.87%;top:72.21%;width:9.85%;height:6.02%"></button>
+    <button class="btn" data-key="start" data-img="btn_start" title="START　系統選單（P）" style="left:52.52%;top:72.21%;width:9.85%;height:6.02%"></button>
+  </div>
+</main>
+
+<p id="keys">鍵盤：1–6 指令　↑↓←→ 方向　Z/空白/Enter = A　X/Esc = B　Shift = SELECT　P = START</p>
+
+<!-- 設定視窗 -->
+<div id="settings" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="set-title">
+  <div class="sheet">
+    <h2 id="set-title">設定</h2>
+    <label class="field"><span>你的名字（{{user}}）</span><input id="set-name" type="text" maxlength="12"></label>
+    <div class="field"><span>遊戲模式</span>
+      <div class="seg">
+        <label><input type="radio" name="mode" value="offline"> 單機模式</label>
+        <label><input type="radio" name="mode" value="api"> 外接 API</label>
+      </div>
+      <small>單機：劇情由內建文本產生，完全離線。API：規則與數值仍由遊戲計算，劇情交給 AI 依世界書撰寫，並可自由輸入對話。</small>
+    </div>
+    <fieldset id="api-fields">
+      <legend>API（OpenAI 相容格式）</legend>
+      <label class="field"><span>預設</span>
+        <select id="set-preset">
+          <option value="">— 選擇常用服務 —</option>
+          <option value="https://api.openai.com/v1">OpenAI</option>
+          <option value="https://openrouter.ai/api/v1">OpenRouter（可用 Claude、Gemini 等）</option>
+          <option value="https://api.deepseek.com/v1">DeepSeek</option>
+          <option value="https://generativelanguage.googleapis.com/v1beta/openai">Google Gemini</option>
+          <option value="http://localhost:1234/v1">LM Studio（本機）</option>
+          <option value="http://localhost:11434/v1">Ollama（本機）</option>
+        </select>
+      </label>
+      <label class="field"><span>Base URL</span><input id="set-url" type="url" placeholder="https://api.openai.com/v1"></label>
+      <label class="field"><span>API Key</span><input id="set-key" type="password" autocomplete="off" placeholder="sk-..."></label>
+      <label class="field"><span>模型</span>
+        <div class="inline"><input id="set-model" type="text" list="model-list" placeholder="例如 gpt-4o-mini、deepseek-chat"><button id="set-fetch" type="button">抓取清單</button></div>
+        <datalist id="model-list"></datalist>
+      </label>
+      <div class="grid2">
+        <label class="field"><span>Temperature</span><input id="set-temp" type="number" min="0" max="2" step="0.05"></label>
+        <label class="field"><span>最大輸出 Tokens</span><input id="set-max" type="number" min="200" max="8000" step="100"></label>
+        <label class="field"><span>記憶輪數</span><input id="set-hist" type="number" min="0" max="40" step="1"></label>
+        <label class="field check"><input id="set-stream" type="checkbox"> <span>串流輸出</span></label>
+      </div>
+      <label class="field"><span>補充設定（選填，會附在世界書後）</span><textarea id="set-extra" rows="3" placeholder="例如：{{user}}是個少年，個性冒失。文風再輕快一點。"></textarea></label>
+      <div class="inline"><button id="set-test" type="button">測試連線</button><span id="set-test-result"></span></div>
+      <small>API Key 只存在你這台裝置的瀏覽器裡（localStorage），不會上傳到其他地方。部分服務不允許瀏覽器直接呼叫（CORS），建議用 OpenRouter 或本機模型。</small>
+    </fieldset>
+    <div class="sheet-btns"><button id="set-close" type="button">取消</button><button id="set-save" type="button" class="primary">儲存</button></div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/worldbook.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
